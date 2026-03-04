@@ -71,6 +71,8 @@ sudo bash scripts/install_service.sh head
 
 ### Step 7: Start everything
 
+The worker service is started automatically by Step 6. Only the head node needs manual startup:
+
 ```bash
 # On head node:
 sudo systemctl start ray-head

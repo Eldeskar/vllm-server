@@ -66,7 +66,7 @@ pip install -r "${SCRIPT_DIR}/requirements.txt"
 echo "[6/6] Verifying installation..."
 python -c "import vllm; print(f'vLLM {vllm.__version__}')"
 python -c "import ray; print(f'Ray {ray.__version__}')"
-nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
+nvidia-smi --query-gpu=name,memory.total --format=csv,noheader || echo "WARNING: nvidia-smi failed (driver mismatch?). A reboot may be needed."
 
 echo ""
 echo "=== Installation complete ==="
