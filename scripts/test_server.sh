@@ -4,7 +4,7 @@ set -euo pipefail
 
 PORT="${VLLM_PORT:-8123}"
 HOST="${VLLM_HOST:-localhost}"
-MODEL="${VLLM_MODEL:-Qwen/Qwen3-VL-32B-Thinking}"
+MODEL="${VLLM_MODEL:-Qwen/Qwen3-VL-32B-Thinking-FP8}"
 
 echo "Testing vLLM server at ${HOST}:${PORT}..."
 

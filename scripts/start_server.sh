@@ -13,11 +13,11 @@ if [ -f "${SCRIPT_DIR}/.env" ]; then
     set +a
 fi
 
-MODEL="${VLLM_MODEL:-Qwen/Qwen3-VL-32B-Thinking}"
+MODEL="${VLLM_MODEL:-Qwen/Qwen3-VL-32B-Thinking-FP8}"
 PORT="${VLLM_PORT:-8123}"
 TP_SIZE="${VLLM_TP_SIZE:-2}"
-MAX_MODEL_LEN="${VLLM_MAX_MODEL_LEN:-16384}"
-GPU_UTIL="${VLLM_GPU_UTIL:-0.92}"
+MAX_MODEL_LEN="${VLLM_MAX_MODEL_LEN:-12288}"
+GPU_UTIL="${VLLM_GPU_UTIL:-0.95}"
 
 echo "Starting vLLM server..."
 echo "  Model:           ${MODEL}"
@@ -29,8 +29,10 @@ echo ""
 
 exec vllm serve "${MODEL}" \
     --tensor-parallel-size "${TP_SIZE}" \
+    --distributed-executor-backend ray \
     --port "${PORT}" \
     --max-model-len "${MAX_MODEL_LEN}" \
     --gpu-memory-utilization "${GPU_UTIL}" \
+    --enforce-eager \
     --trust-remote-code \
     --dtype auto
